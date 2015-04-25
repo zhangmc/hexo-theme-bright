@@ -1,11 +1,15 @@
 menu:
   home: /
+  #categories: /categories
   archives: /archives
   tags: /tags
   #about: /about
 
 # Place your favicon.ico to /source directory.
 favicon: /favicon.ico
+
+# Set default keywords (Use a comma to separate)
+keywords: "Hexo,next"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -30,8 +34,16 @@ highlight_theme: normal
 mathjax:
 
 
+# Schemes
+#scheme: Mist
+
+
 # Automatically scroll page to section which is under <!-- more --> mark.
 scroll_to_more: true
+
+
+# Automatically add list number to toc.
+toc_list_number: true
 
 
 ## DO NOT EDIT THE FOLLOWING SETTINGS
@@ -49,4 +61,4 @@ css: css
 images: images
 
 # Theme version
-version: 0.3.0rc5
+version: 0.4.2

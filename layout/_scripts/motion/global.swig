@@ -25,6 +25,7 @@
     var sidebarToggleLine3rdStatusArrow = {width: '50%', rotateZ: '45deg', top: '-2px'};
     var sidebarToogleLine3rdStatusClose = {width: '100%', rotateZ: '45deg', top: '-5px'};
 
+    LogoAndMenuMotion();
     sidebatToggleMotion();
     postsListMotion();
     backToTopMotion();
@@ -39,6 +40,19 @@
         sidebarContentMotion();
       })
       .on('sidebar.isHiding', function () {});
+
+    function LogoAndMenuMotion() {
+      $.Velocity.RunSequence([
+        { e: $('.brand'), p: { opacity: 1 }, o: { duration: 100 } },
+        { e: $('.logo'), p: { opacity: 1, top: 0 }, o: { duration: 50} },
+        {% if theme.scheme === 'Mist' %}
+        { e: $('.logo-line-before i'), p: { translateX: "100%" }, o: { duration: 500, sequenceQueue: false } },
+        { e: $('.logo-line-after i'), p: { translateX: "-100%" }, o: { duration: 500, sequenceQueue: false } },
+        {% endif %}
+        { e: $('.site-title'), p: { opacity: 1, top: 0 }, o: { duration: 200 } }
+      ]);
+      $('.menu-item').velocity('transition.slideDownIn', {display: null});
+    }
 
 
     function backToTopMotion () {
@@ -55,6 +69,7 @@
       sidebarToggleLine3rd.velocity(sidebarToogleLine3rdStatusClose);
 
       sidebar.velocity({width: SIDEBAR_WIDTH}, {
+        display: 'block',
         duration: SIDEBAR_DISPLAY_DURATION,
         complete: function () {
           sidebar.addClass('sidebar-active');
@@ -84,7 +99,8 @@
     }
 
     function postsListMotion () {
-      $('.post').velocity('transition.slideDownIn', {stagger: 300, drag: true});
+      var postMotionOptions = window.postMotionOptions || {stagger: 300, drag: true};
+      $('.post').velocity('transition.slideDownIn', postMotionOptions);
     }
 
     function sidebatToggleMotion () {
