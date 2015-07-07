@@ -13,6 +13,14 @@
   <div id="posts" class="posts-expand">
     {{ post_template.render(page) }}
 
+    <div class="post-spread">
+      {% if theme.jiathis %}
+        {% include '_partials/share/jiathis.swig' %}
+      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
+        {% include '_partials/share/duoshuo_share.swig' %}
+      {% endif %}
+    </div>
+
     {% if page.comments %}
       <div class="comments" id="comments">
         {% if (config.duoshuo and config.duoshuo.shortname) or config.duoshuo_shortname %}

@@ -6,6 +6,8 @@
 </head>
 
 <body>
+  {% include '_partials/old-browsers.swig' %}
+
   <div class="container one-column {% block page_class %}{% endblock %}">
     <div class="headband"></div>
 
@@ -20,7 +22,14 @@
         <div id="content" class="content">
           {% block content %}{% endblock %}
         </div>
+
+        {% if (theme.duoshuo_hotartical and page.title)  %}
+          <!-- 多说热评文章-->
+          <p>热评文章</p>
+          <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+        {% endif %}
       </div>
+
 
       {% block sidebar %}{% endblock %}
     </div>
@@ -42,12 +51,22 @@
   {% include '_scripts/fancy-box.swig' %}
   {% include '_scripts/helpers.swig' %}
   {% include '_scripts/motion.swig' %}
+  <script type="text/javascript" src="{{ url_for(theme.js) }}/search-toggle.js"></script>
 
   {% block script_extra %}{% endblock %}
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+      if (CONFIG.sidebar === 'always') {
+        displaySidebar();
+      }
+    });
+  </script>
 
   {% include '_scripts/mathjax.swig' %}
   {% block comment_system %}{% endblock %}
 
+  {% include '_scripts/baidushare.swig' %}
   {% include '_scripts/analytics/google-analytics.swig' %}
 </body>
 </html>
